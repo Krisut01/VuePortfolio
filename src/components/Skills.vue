@@ -23,6 +23,7 @@ export default {
         { category: 'Back-end', level: 85, technologies: ['Node.js', 'Express.js', 'Python', 'Django'] },
         { category: 'Database', level: 80, technologies: ['MongoDB', 'MySQL', 'PostgreSQL'] },
         { category: 'DevOps', level: 75, technologies: ['Git', 'Docker', 'AWS', 'CI/CD'] },
+        
       ]
     }
   }

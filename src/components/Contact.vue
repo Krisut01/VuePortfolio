@@ -27,22 +27,27 @@
       </div>
       <div class="contact-card info-card">
         <div class="card-content">
-          <h3>Get in Touch</h3>
-          <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+          <h3>Let's Create Something Amazing Together</h3>
+          <p class="get-in-touch">
+            Are you ready to take your digital presence to the next level? As a passionate full-stack developer, I'm excited to bring your ideas to life with cutting-edge technology and sleek design. Whether you're looking to launch a new project, optimize an existing one, or need a tech-savvy partner for your next big idea, I'm here to help you succeed in the digital world.
+          </p>
           <ul class="contact-info">
             <li>
               <i class="fas fa-envelope"></i>
-              <span>john.doe@example.com</span>
+              <span>christian@gmail.com</span>
             </li>
             <li>
               <i class="fas fa-phone"></i>
-              <span>+1 (123) 456-7890</span>
+              <span>0912345678</span>
             </li>
             <li>
               <i class="fas fa-map-marker-alt"></i>
-              <span>San Francisco, CA</span>
+              <span>Butuan City, Philippines</span>
             </li>
           </ul>
+          <p class="cta-text">
+            Don't hesitate to reach out. Your next groundbreaking project could be just one message away!
+          </p>
         </div>
       </div>
     </div>
@@ -64,6 +69,8 @@ export default {
   methods: {
     submitForm() {
       console.log('Form submitted:', this.form);
+      // Here you would typically send the form data to a server
+      // For now, we'll just reset the form
       this.form = { name: '', email: '', message: '' };
     }
   }
@@ -81,7 +88,7 @@ export default {
 .contact-container {
   display: flex;
   gap: 2rem;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   animation: fadeIn 1s ease-out;
   perspective: 1000px;
@@ -89,20 +96,25 @@ export default {
 
 .contact-card {
   flex: 1;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(18, 18, 20, 0.6);
   padding: 2rem;
   border-radius: 15px;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transition: all 0.5s ease;
   transform-style: preserve-3d;
+  backdrop-filter: blur(10px);
 }
 
 .contact-card:hover {
-  transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+  transform: scale(1.05) translateZ(30px);
   box-shadow: 0 20px 40px rgba(66, 185, 131, 0.3);
 }
 
 .card-content {
-  transform: translateZ(30px);
+  transition: all 0.5s ease;
+}
+
+.contact-card:hover .card-content {
+  transform: translateZ(60px);
 }
 
 .form-card .card-content {
@@ -112,7 +124,7 @@ export default {
 }
 
 .info-card .card-content {
-  text-align: center;
+  text-align: left;
 }
 
 .contact-form {
@@ -123,13 +135,19 @@ export default {
 .form-group {
   margin-bottom: 1.5rem;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.form-group:hover {
+  transform: scale(1.05) translateZ(10px);
 }
 
 input, textarea {
   width: 100%;
   padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
+  padding-top: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 5px;
   color: #fff;
   font-size: 1rem;
@@ -139,27 +157,39 @@ input, textarea {
 label {
   position: absolute;
   left: 0.75rem;
-  top: 0.75rem;
-  color: #aaa;
+  top: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
   transition: all 0.3s ease;
   pointer-events: none;
+  background-color: transparent;
 }
 
 input:focus, textarea:focus {
   outline: none;
   box-shadow: 0 0 10px rgba(66, 185, 131, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #42b983;
+  transform: scale(1.05) translateZ(20px);
 }
 
 input:focus + label, textarea:focus + label,
 input:not(:placeholder-shown) + label, textarea:not(:placeholder-shown) + label {
-  top: -1.5rem;
-  font-size: 0.8rem;
   color: #42b983;
+  transform: translateY(-1.2rem) scale(0.8);
+}
+
+input::placeholder, textarea::placeholder {
+  color: transparent;
+}
+
+input:focus::placeholder, textarea:focus::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .submit-btn {
   background: #42b983;
-  color: #fff;
+  color: #0e0e10;
   border: none;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
@@ -170,34 +200,55 @@ input:not(:placeholder-shown) + label, textarea:not(:placeholder-shown) + label 
   align-items: center;
   justify-content: center;
   gap: 10px;
+  font-weight: bold;
 }
 
 .submit-btn:hover {
   background-color: #3aa876;
-  transform: translateY(-2px);
+  transform: scale(1.05) translateZ(20px);
   box-shadow: 0 5px 15px rgba(66, 185, 131, 0.4);
 }
 
-.contact-info h3 {
+.info-card h3 {
   color: #42b983;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
-.contact-info ul {
+.get-in-touch {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.contact-info {
   list-style-type: none;
   padding: 0;
+  margin-bottom: 1.5rem;
 }
 
 .contact-info li {
   margin-bottom: 0.5rem;
-  color: #e0e0e0;
+  color: rgba(255, 255, 255, 0.87);
   display: flex;
   align-items: center;
   gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.contact-info li:hover {
+  transform: scale(1.05) translateZ(10px);
 }
 
 .contact-info i {
   color: #42b983;
+  width: 20px;
+}
+
+.cta-text {
+  font-style: italic;
+  color: #42b983;
+  font-weight: bold;
 }
 
 @keyframes fadeIn {
@@ -209,5 +260,10 @@ input:not(:placeholder-shown) + label, textarea:not(:placeholder-shown) + label 
   .contact-container {
     flex-direction: column;
   }
+}
+
+/* Add this new style for better contrast in the form card */
+.form-card {
+  background: rgba(24, 24, 28, 0.8);
 }
 </style>

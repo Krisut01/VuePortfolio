@@ -1,13 +1,13 @@
 <template lang="">
   <div id="app">
-    <Navbar />
+    <Navbar :scrollTo="scrollTo" />
     <div class="content">
-      <About />
+      <About :scrollTo="scrollTo" />
       <Projects />
       <Skills />
       <Contact />
     </div>
-    <Footer />
+    <Footer :scrollTo="scrollTo" />
   </div>
 </template>
 
@@ -28,6 +28,14 @@ export default {
     Skills,
     Contact,
     Footer
+  },
+  methods: {
+    scrollTo(sectionId) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   }
 }
 </script>
