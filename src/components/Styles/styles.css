@@ -42,6 +42,7 @@ h6 { font-size: 1rem; }
   flex-direction: column;
   justify-content: center;
   background-color: #0e0e10; /* Match the body background color */
+  overflow: visible; /* Add this line to ensure content is not cut off */
 }
 
 /* Navbar styles */
@@ -172,21 +173,18 @@ h6 { font-size: 1rem; }
   border-radius: 10px;
 }
 
-.skill-item h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
-}
-
-.skill-bar {
+.skill-bar-container {
   background: rgba(255, 255, 255, 0.2);
   height: 10px;
   border-radius: 5px;
   overflow: hidden;
+  margin-bottom: 10px;
 }
 
 .skill-progress {
   background: #42b983;
   height: 100%;
+  transition: width 1s ease-out;
 }
 
 /* Contact section */

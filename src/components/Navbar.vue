@@ -3,7 +3,9 @@
     <div class="navbar-container">
       <div class="navbar-logo">
         <a href="#about" @click.prevent="scrollTo('about')">
-          <span class="typing-animation">{{ currentText }}</span>
+          <span class="typing-container">
+            <span class="typing-text">{{ currentText }}</span>
+          </span>
         </a>
       </div>
       <div class="navbar-menu-toggle" @click="toggleMenu">
@@ -35,7 +37,7 @@ export default {
         { id: 'contact', name: 'Contact' }
       ],
       currentText: '',
-      fullTexts: ['Christian Doe', 'Web Developer'],
+      fullTexts: ['Hello!', "I'm Christian Doe", 'A Web Developer'],
       textIndex: 0,
       charIndex: 0,
       isDeleting: false,
@@ -52,15 +54,6 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
-    scrollTo(sectionId) {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const yOffset = -60;
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({top: y, behavior: 'smooth'});
-      }
-      this.isMenuOpen = false;
-    },
     handleScroll() {
       this.isScrolled = window.scrollY > 50;
     },
@@ -96,12 +89,13 @@ export default {
 
 <style scoped>
 .navbar {
-  background-color: rgba(14, 14, 16, 0.2); /* Darker, more transparent */
-  backdrop-filter: blur(5px);
+  background-color: rgba(14, 14, 16, 0.8);
+  backdrop-filter: blur(10px);
+  transition: background-color 0.3s ease;
 }
 
 .navbar-scrolled {
-  background-color: rgba(14, 14, 16, 0.8); /* Darker when scrolled */
+  background-color: rgba(14, 14, 16, 0.95);
 }
 
 .navbar-container {
@@ -110,35 +104,43 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
 }
 
 .navbar-logo a {
-  color: rgba(255, 255, 255, 0.87); /* High emphasis text */
+  color: #ffffff;
   font-size: 1.8rem;
   font-weight: bold;
   text-decoration: none;
   letter-spacing: 1px;
-  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
-.navbar-logo a:hover {
-  color: #42b983;
-  text-shadow: 0 0 10px rgba(66, 185, 131, 0.5);
-}
-
-.typing-animation {
+.typing-container {
+  position: relative;
   display: inline-block;
-  overflow: hidden;
-  border-right: 2px solid #42b983;
-  white-space: nowrap;
-  margin: 0 auto;
-  animation: blink-caret 0.75s step-end infinite;
+  min-width: 200px;
 }
 
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: #42b983 }
+.typing-text {
+  position: relative;
+  color: #42b983;
+  font-weight: bold;
+}
+
+.typing-text::after {
+  content: '|';
+  position: absolute;
+  right: -8px;
+  top: 0;
+  color: #42b983;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .navbar-menu {
@@ -154,12 +156,11 @@ export default {
 
 .navbar-menu a {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.6); /* Medium emphasis text */
+  color: #ffffff;
   font-weight: 500;
   font-size: 1.1rem;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   position: relative;
-  padding-bottom: 5px;
 }
 
 .navbar-menu a::after {
@@ -167,14 +168,14 @@ export default {
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: 0;
+  bottom: -5px;
   left: 0;
   background-color: #42b983;
-  transition: all 0.3s ease;
+  transition: width 0.3s ease;
 }
 
 .navbar-menu a:hover {
-  color: rgba(255, 255, 255, 0.87); /* High emphasis on hover */
+  color: #42b983;
 }
 
 .navbar-menu a:hover::after {
@@ -190,9 +191,9 @@ export default {
 .bar {
   width: 25px;
   height: 3px;
-  background-color: rgba(255, 255, 255, 0.87); /* High emphasis for menu toggle */
+  background-color: #ffffff;
   margin: 3px 0;
-  transition: all 0.3s ease;
+  transition: 0.4s;
 }
 
 @media (max-width: 768px) {
@@ -206,10 +207,10 @@ export default {
     left: 0;
     right: 0;
     flex-direction: column;
-    background-color: rgba(14, 14, 16, 0.95); /* Darker background for mobile menu */
+    background-color: rgba(14, 14, 16, 0.95);
     padding: 1rem 0;
     clip-path: circle(0% at top right);
-    transition: all 0.5s ease-out;
+    transition: clip-path 0.5s ease-out;
   }
 
   .navbar-menu.active {

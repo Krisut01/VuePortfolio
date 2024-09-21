@@ -1,36 +1,113 @@
 <template>
-  <section id="about" class="section">
+  <section id="about" class="section" ref="aboutSection">
     <div class="background-image"></div>
     <div class="content-wrapper">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-content">
-        <div class="image-container">
+      <h2 class="section-title" ref="sectionTitle">About Me</h2>
+      <div class="about-content" ref="aboutContent">
+        <div class="image-container" ref="imageContainer">
           <div class="image-border"></div>
-          <img src="/images/1.jpg" alt="Profile" class="profile-image">
+          <img src="/images/3.jpeg" alt="Profile" class="profile-image">
         </div>
-        <div class="about-text">
-          <p class="highlight">Hello! I'm Christian , a passionate full-stack developer with 5 years of experience in creating robust and scalable web applications.</p>
-          <p>I specialize in JavaScript, Vue.js, Node.js, and Python, always excited to explore new technologies and best practices in software development.</p>
-          <p>When I'm not coding, you can find me hiking in the mountains or experimenting with new recipes in the kitchen. I believe in the power of technology to solve real-world problems and I'm always looking for new challenges to tackle.</p>
-          <div class="cta-container">
+        <div class="about-text" ref="aboutText">
+          <p class="highlight" ref="highlightText">Hello! I'm Christian , a passionate full-stack developer with 5 years of experience in creating robust and scalable web applications.</p>
+          <p ref="paragraph1">I specialize in JavaScript, Vue.js, Node.js, and Python, always excited to explore new technologies and best practices in software development.</p>
+          <p ref="paragraph2">When I'm not coding, you can find me hiking in the mountains or experimenting with new recipes in the kitchen. I believe in the power of technology to solve real-world problems and I'm always looking for new challenges to tackle.</p>
+          <div class="cta-container" ref="ctaContainer">
             <a href="#contact" class="cta-button" @click.prevent="scrollTo('contact')">Hire Me</a>
             <a href="#projects" class="cta-button secondary" @click.prevent="scrollTo('projects')">View Projects</a>
           </div>
         </div>
       </div>
     </div>
+    <canvas ref="canvas" class="background-canvas"></canvas>
   </section>
 </template>
 
 <script>
+import { gsap } from 'gsap';
+import * as THREE from 'three';
+
 export default {
   name: 'About',
+  data() {
+    return {
+      scene: null,
+      camera: null,
+      renderer: null,
+      geometry: null,
+      material: null,
+      mesh: null,
+      isAnimating: false
+    }
+  },
+  mounted() {
+    this.initThreeJS();
+    this.initAnimations();
+    window.addEventListener('resize', this.onWindowResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.onWindowResize);
+    this.disposeThreeJS();
+  },
   methods: {
     scrollTo(sectionId) {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    },
+    initThreeJS() {
+      this.scene = new THREE.Scene();
+      this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      this.renderer = new THREE.WebGLRenderer({ canvas: this.$refs.canvas, alpha: true });
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+      this.geometry = new THREE.SphereGeometry(1, 32, 32);
+      this.material = new THREE.MeshBasicMaterial({ color: 0x42b983, wireframe: true });
+      this.mesh = new THREE.Mesh(this.geometry, this.material);
+
+      this.scene.add(this.mesh);
+      this.camera.position.z = 5;
+
+      this.animate();
+    },
+    animate() {
+      requestAnimationFrame(this.animate);
+      this.mesh.rotation.x += 0.01;
+      this.mesh.rotation.y += 0.01;
+      this.renderer.render(this.scene, this.camera);
+    },
+    onWindowResize() {
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    },
+    disposeThreeJS() {
+      this.geometry.dispose();
+      this.material.dispose();
+      this.renderer.dispose();
+    },
+    initAnimations() {
+      const tl = gsap.timeline({ paused: true });
+
+      tl.from(this.$refs.sectionTitle, { duration: 1, y: 50, opacity: 0, ease: 'power3.out' })
+        .from(this.$refs.imageContainer, { duration: 1.5, scale: 0.5, opacity: 0, rotationY: 180, ease: 'back.out(1.7)' }, '-=0.5')
+        .from(this.$refs.aboutText.children, { duration: 1, y: 30, opacity: 0, stagger: 0.2, ease: 'power3.out' }, '-=1')
+        .from(this.$refs.ctaContainer.children, { duration: 0.8, scale: 0.5, opacity: 0, stagger: 0.2, ease: 'back.out(1.7)' }, '-=0.5');
+
+      this.$refs.aboutSection.addEventListener('mouseenter', () => {
+        if (!this.isAnimating) {
+          this.isAnimating = true;
+          tl.play();
+        }
+      });
+
+      this.$refs.aboutSection.addEventListener('mouseleave', () => {
+        if (this.isAnimating) {
+          this.isAnimating = false;
+          tl.reverse();
+        }
+      });
     }
   }
 }
@@ -54,7 +131,6 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/images/3.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -87,7 +163,7 @@ export default {
   animation: fadeIn 1s ease-out;
   transform-style: preserve-3d;
   perspective: 1000px;
-  background-color: rgba(18, 18, 20, 0.6); /* Slightly lighter than the background */
+  background-color: rgb(0 0 0 / 60%);
   padding: 2rem;
   border-radius: 15px;
   backdrop-filter: blur(10px);
@@ -278,5 +354,12 @@ export default {
   .about-text {
     padding: 1rem;
   }
+}
+
+.background-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 </style>
