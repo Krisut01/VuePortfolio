@@ -34,6 +34,8 @@ export default {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.warn(`Element with id "${sectionId}" not found`);
       }
     }
   }

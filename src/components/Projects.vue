@@ -176,8 +176,51 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
+  .projects-carousel {
+    max-width: 100%;
+    height: auto;
   }
+
+  .project-card {
+    width: 100%;
+    height: auto;
+    position: relative;
+    transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1rem;
+  }
+
+  .project-info {
+    padding: 1rem;
+    transform: none;
+  }
+
+  .project-link {
+    margin-top: 1rem;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .project-indicators {
+    margin-top: 1rem;
+  }
+
+  .show-more-container {
+    margin-top: 1rem;
+  }
+}
+
+.background-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 </style>
