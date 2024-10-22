@@ -9,9 +9,11 @@
           <img src="/images/3.jpeg" alt="Profile" class="profile-image">
         </div>
         <div class="about-text" ref="aboutText">
-          <p class="highlight" ref="highlightText">Hello! I'm Christian , a passionate full-stack developer with 5 years of experience in creating robust and scalable web applications.</p>
-          <p ref="paragraph1">I specialize in JavaScript, Vue.js, Node.js, and Python, always excited to explore new technologies and best practices in software development.</p>
-          <p ref="paragraph2">When I'm not coding, you can find me hiking in the mountains or experimenting with new recipes in the kitchen. I believe in the power of technology to solve real-world problems and I'm always looking for new challenges to tackle.</p>
+          <p class="highlight" ref="highlightText">Hello! I'm Christian, a dedicated student with several years of experience in HTML, Java, C, Python, web development, and Laravel, continuously expanding my skill set and expertise.</p>
+          <p ref="paragraph1">I am passionate about programming and software development, always eager to explore cutting-edge technologies and industry best practices to deliver high-quality solutions.</p>
+          <p ref="paragraph2">Outside of coding, I enjoy exploring nature and tackling new challenges by solving complex problems. I believe in leveraging technology to address real-world issues and am always looking for opportunities to grow and develop as a software engineer.</p>
+
+
           <div class="cta-container" ref="ctaContainer">
             <a href="#contact" class="cta-button" @click.prevent="scrollTo('contact')">Hire Me</a>
             <a href="#projects" class="cta-button secondary" @click.prevent="scrollTo('projects')">View Projects</a>
