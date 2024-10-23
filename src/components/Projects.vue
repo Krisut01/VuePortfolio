@@ -1,23 +1,47 @@
 <template>
-  <section id="projects" class="section">
+  <v-container id="projects" class="section" fluid>
     <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-      <div v-for="(project, index) in projects" :key="index" class="project-card" :style="{ animationDelay: `${index * 0.1}s` }">
+    <v-row class="projects-grid">
+      <v-col
+        v-for="(project, index) in projects"
+        :key="index"
+        cols="12"
+        md="6"
+        lg="4"
+        class="project-card"
+        :style="{ animationDelay: `${index * 0.1}s` }"
+      >
         <div class="project-image">
-          <img :src="project.image" :alt="project.title">
+          <img :src="project.image" :alt="project.title" />
         </div>
         <div class="project-content">
           <h3>{{ project.title }}</h3>
           <p>{{ project.description }}</p>
           <div class="project-tech">
-            <span v-for="tech in project.technologies" :key="tech" class="tech-tag">{{ tech }}</span>
+            <v-chip
+              v-for="tech in project.technologies"
+              :key="tech"
+              class="tech-tag"
+              small
+            >
+              {{ tech }}
+            </v-chip>
           </div>
         </div>
-        <a :href="project.link" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
-      </div>
-    </div>
-  </section>
+        <v-btn
+          :href="project.link"
+          class="project-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          block
+        >
+          View Project
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
 
 <script>
 export default {

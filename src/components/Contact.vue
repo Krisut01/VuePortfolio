@@ -32,19 +32,21 @@
             Are you ready to take your digital presence to the next level? As a passionate full-stack developer, I'm excited to bring your ideas to life with cutting-edge technology and sleek design. Whether you're looking to launch a new project, optimize an existing one, or need a tech-savvy partner for your next big idea, I'm here to help you succeed in the digital world.
           </p>
           <ul class="contact-info">
-            <li>
-              <i class="fas fa-envelope"></i>
-              <span>christian@gmail.com</span>
-            </li>
-            <li>
-              <i class="fas fa-phone"></i>
-              <span>0912345678</span>
-            </li>
-            <li>
-              <i class="fas fa-map-marker-alt"></i>
-              <span>Butuan City, Philippines</span>
-            </li>
-          </ul>
+    <li>
+        <i class="material-icons">email</i>
+        <span>christian@gmail.com</span>
+    </li>
+    <li>
+        <i class="material-icons">phone</i>
+        <span>0912345678</span>
+    </li>
+    <li>
+        <i class="material-icons">location_on</i>
+        <span>Butuan City, Philippines</span>
+    </li>
+</ul>
+
+
           <p class="cta-text">
             Don't hesitate to reach out. Your next groundbreaking project could be just one message away!
           </p>
@@ -266,4 +268,5 @@ input:focus::placeholder, textarea:focus::placeholder {
 .form-card {
   background: rgba(24, 24, 28, 0.8);
 }
+
 </style>
