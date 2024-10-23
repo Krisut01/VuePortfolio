@@ -1,8 +1,15 @@
 <template>
-  <section id="skills" class="section" ref="skillsSection" @click="animateAllSkills">
+  <v-container id="skills" class="section" ref="skillsSection" fluid @click="animateAllSkills">
     <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div v-for="(skill, index) in skills" :key="index" class="skill-item">
+    <v-row class="skills-grid">
+      <v-col
+        v-for="(skill, index) in skills"
+        :key="index"
+        cols="12"
+        md="6"
+        lg="4"
+        class="skill-item"
+      >
         <div class="skill-content">
           <h3>{{ skill.category }}</h3>
           <div class="skill-bar-container">
@@ -13,10 +20,11 @@
           </div>
           <p>{{ skill.technologies.join(', ') }}</p>
         </div>
-      </div>
-    </div>
-  </section>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
 
 <script>
 export default {

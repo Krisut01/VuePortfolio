@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div id="app">
     <Navbar :scrollTo="scrollTo" />
     <div class="content">
@@ -10,7 +10,6 @@
     <Footer :scrollTo="scrollTo" />
   </div>
 </template>
-
 <script>
 import Navbar from './components/Navbar.vue'
 import About from './components/About.vue'
@@ -18,6 +17,7 @@ import Projects from './components/Projects.vue'
 import Skills from './components/Skills.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
+
 
 export default {
   name: 'App',
